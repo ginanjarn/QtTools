@@ -1,0 +1,163 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/syntax.html
+file_extensions:
+  - pro
+  - pri
+  - prf
+  - qm
+
+scope: source.qmake
+
+variables:
+  identifier: '[a-zA-Z_][a-zA-Z0-9_\-\+\*]+'
+  assign_operator: '[\+\-\*\~]?='
+
+  comment_begin: '\#'
+  comment_end: '\n'
+
+  assign_statement: '({{identifier}})\s*({{assign_operator}})'
+  function_begin: '({{identifier}})\s*(\()'
+  function_end: '(\))'
+
+  block_begin: '(\{)'
+  block_end: '(\})'
+  group_begin: '(\()'
+  group_end: '(\))'
+  quote_begin: '(\")'
+  quote_end: '(\")'
+  
+  inline_variable: '(\$\${{identifier}})'
+  qmake_variable_begin: '(\$\$\{)'
+  qmake_variable_end: '(\})'
+  qmake_environment_begin: '(\$\$\()'
+  qmake_environment_end: '(\))'
+  qmake_property_begin: '(\$\$\[)'
+  qmake_property_end: '(\])'
+  makefile_variable_begin: '(\$\()'
+  makefile_variable_end: '(\))'
+
+contexts:
+  main:
+    - include: escaped
+    - include: assignment
+    - include: function
+    - include: block
+    - include: comment
+    - include: qualified_name
+
+  escaped:
+    - match: '\\.'
+      scope: constant.escaped.qmake
+
+  comment:
+    - match: '{{comment_begin}}'
+      push: line_comment
+
+  line_comment:
+    - meta_scope: comment.line.qmake
+    - match: '{{comment_end}}'
+      pop: 1
+
+  assignment:
+    - match: '{{assign_statement}}'
+      captures:
+        1: entity.name.qmake
+        2: keyword.operator.qmake
+      push: rvalue
+
+  rvalue:
+    - meta_scope: meta.assignment.qmake
+    - meta_content_scope: meta.string.qmake
+    - match: '\\\n'
+    - match: '\n'
+      pop: 1
+    - include: reference
+
+  reference:
+    - match: '{{inline_variable}}'
+      scope: variable.qmake
+
+    - match: '{{qmake_variable_begin}}'
+      push:
+        - meta_scope: variable.qmake
+        - match: '{{qmake_variable_end}}'
+          pop: 1
+        - include: reference
+
+    - match: '{{qmake_property_begin}}'
+      push:
+        - meta_scope: variable.property.qmake
+        - match: '{{qmake_property_end}}'
+          pop: 1
+        - include: reference
+
+    - match: '{{qmake_environment_begin}}'
+      push:
+        - meta_scope: variable.environment.qmake
+        - match: '{{qmake_environment_end}}'
+          pop: 1
+        - include: reference
+
+    - match: '{{makefile_variable_begin}}'
+      push:
+        - meta_scope: variable.makefile.qmake
+        - match: '{{makefile_variable_end}}'
+          pop: 1
+        - include: reference
+
+  function:
+    - match: '{{function_begin}}'
+      captures:
+        1: entity.name.function.qmake
+        2: punctuation.definition.parameters.begin.qmake
+      push: parameters
+
+  parameters:
+    - match: '{{function_end}}'
+      captures:
+        1: punctuation.definition.parameters.end.qmake
+      pop: 1
+
+    - include: escaped
+    - include: reference
+    - include: group
+    - include: quote
+
+  block:
+    - match: '{{block_begin}}'
+      scope: punctuation.definition.section.begin.qmake
+      push: block_content
+
+  block_content:
+    - match: '{{block_end}}'
+      scope: punctuation.definition.section.end.qmake
+      pop: 1
+    - include: main
+
+  group:
+    - match: '{{group_begin}}'
+      scope: punctuation.definition.group.begin.qmake
+      push: group_content
+
+  group_content:
+    - match: '{{group_end}}'
+      scope: punctuation.definition.group.end.qmake
+      pop: 1
+
+  quote:
+    - match: '{{quote_begin}}'
+      scope: punctuation.definition.quote.begin.qmake
+      push: quote_content
+
+  quote_content:
+    - meta_scope: string.quoted.qmake
+    - match: '\\\"'
+    - match: '{{quote_end}}'
+      scope: punctuation.definition.quote.end.qmake
+      pop: 1
+    - include: reference
+
+  qualified_name:
+    - match: '{{identifier}}'
+      scope: entity.name.qmake

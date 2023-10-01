@@ -1,0 +1,12 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/syntax.html
+file_extensions:
+  - ui
+
+scope: text.qt.ui
+
+contexts:
+  main:
+    - match: ""
+      push: "Packages/XML/XML.sublime-syntax"
