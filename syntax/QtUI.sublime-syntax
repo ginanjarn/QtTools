@@ -8,5 +8,4 @@ scope: text.qt.ui
 
 contexts:
   main:
-    - match: ""
-      push: "Packages/XML/XML.sublime-syntax"
+    - include: "Packages/XML/XML.sublime-syntax"
