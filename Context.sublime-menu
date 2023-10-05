@@ -1,8 +1,12 @@
-[	
+[
+	{
+		"caption": "-",
+		"id": "qttools"
+	},
 	{
 		"caption" : "Open Designer",
 		"mnemonic" : "D",
 		"id" : "qttools",
 		"command" : "qttools_open_designer",
-	},	
+	},
 ]
