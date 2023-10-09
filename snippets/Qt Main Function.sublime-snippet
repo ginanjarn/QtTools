@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    ${1:MainWindow} ${2:w};
+    ${2:w}.show();$0
+
+    return app.exec();
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>qmain</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
