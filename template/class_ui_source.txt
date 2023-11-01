@@ -1,0 +1,14 @@
+#include "${header}"
+#include "ui_${header}"
+
+${class_name}::${class_name}(QWidget *parent) :
+    ${baseclass_name}(parent),
+    ui(new Ui::${class_name})
+{
+    ui->setupUi(this);
+}
+
+${class_name}::~${class_name}()
+{
+    delete ui;
+}

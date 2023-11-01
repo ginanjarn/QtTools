@@ -1,0 +1,16 @@
+#ifndef ${include_guard}
+#define ${include_guard}
+
+#include <${baseclass_name}>
+
+class ${class_name} : public ${baseclass_name}
+{
+	Q_OBJECT
+public:
+	explicit ${class_name}(${baseclass_name} *parent = nullptr);
+
+signals:
+
+};
+
+#endif // ${include_guard}

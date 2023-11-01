@@ -1,0 +1,22 @@
+#ifndef ${include_guard}
+#define ${include_guard}
+
+#include <${baseclass_name}>
+
+namespace Ui {
+class ${class_name};
+}
+
+class ${class_name} : public ${baseclass_name}
+{
+    Q_OBJECT
+
+public:
+    explicit ${class_name}(QWidget *parent = nullptr);
+    ~${class_name}();
+
+private:
+    Ui::${class_name} *ui;
+};
+
+#endif // ${include_guard}

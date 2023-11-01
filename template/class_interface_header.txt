@@ -1,0 +1,11 @@
+#ifndef ${include_guard}
+#define ${include_guard}
+
+class ${class_name}
+{
+public:
+	virtual ~${class_name}() = default;
+
+};
+
+#endif // ${include_guard}

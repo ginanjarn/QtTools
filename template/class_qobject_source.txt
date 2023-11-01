@@ -1,0 +1,6 @@
+#include "${header}"
+
+${class_name}::${class_name}(${baseclass_name} *parent): ${baseclass_name}{parent}
+{
+
+}

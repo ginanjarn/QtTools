@@ -1,0 +1,11 @@
+#ifndef ${include_guard}
+#define ${include_guard}
+
+class ${class_name}
+{
+public:
+	explicit ${class_name}();
+
+};
+
+#endif // ${include_guard}

@@ -1,0 +1,51 @@
+[
+	{
+		"caption": "-",
+		"id": "qttools"
+	},
+	{
+		"caption": "Qt Tools",
+		"id": "qttools",
+		"children":
+		[
+			{
+				"caption": "New Class",
+				"command": "qttools_create_class",
+				"args": {
+					"kind":"PLAIN",
+					"paths": [],
+				}
+			},
+			{
+				"caption": "New Interface Class",
+				"command": "qttools_create_class",
+				"args": {
+					"kind":"INTERFACE",
+					"paths": [],
+				}
+			},
+			{
+				"caption": "-"
+			},
+			{
+				"caption": "New QObject Class",
+				"command": "qttools_create_class",
+				"args": {
+					"kind":"QOBJECT",
+					"paths": [],
+				}
+			},
+			{
+				"caption": "-"
+			},
+			{
+				"caption": "New Designer Form",
+				"command": "qttools_create_class",
+				"args": {
+					"kind":"UI",
+					"paths": [],
+				}
+			},
+		]
+	},
+]
