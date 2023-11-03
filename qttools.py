@@ -100,8 +100,8 @@ class Config:
         if not self.class_name.isidentifier():
             raise ValueError(f"Invalid class name {self.class_name!r}")
 
-        self.source = self.class_name.lower() + ".cpp"
-        self.header = self.class_name.lower() + ".h"
+        self.source = self.class_name + ".cpp"
+        self.header = self.class_name + ".h"
         self.include_guard = self.class_name.upper() + "_H"
 
 
