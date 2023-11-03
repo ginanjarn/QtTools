@@ -143,9 +143,9 @@ class PlainClass(AbstractGenerator):
 
     def configure(self):
         class_name = text_input("Class name")
-        self.config = Config(class_name)
-
         check_assigned(class_name, "class_name")
+
+        self.config = Config(class_name)
 
     def generate(self):
         source_path = self.base_path.joinpath(self.config.source)
@@ -164,9 +164,9 @@ class InterfaceClass(AbstractGenerator):
 
     def configure(self):
         class_name = text_input("Class name")
-        self.config = Config(class_name)
-
         check_assigned(class_name, "class_name")
+
+        self.config = Config(class_name)
 
     def generate(self):
         header_path = self.base_path.joinpath(self.config.header)
@@ -184,12 +184,12 @@ class QObjectClass(AbstractGenerator):
     def configure(self):
         classes = QOBJECT_CLASSES
         baseclass_name = choice_input(classes, "Base Class", selected_index=0)
+        check_assigned(baseclass_name, "baseclass_name")
+
         class_name = text_input("Class name", initial_text=baseclass_name.lstrip("Q"))
+        check_assigned(class_name, "class_name")
 
         self.config = Config(class_name, baseclass_name)
-
-        check_assigned(class_name, "class_name")
-        check_assigned(baseclass_name, "baseclass_name")
 
     def generate(self):
         source_path = self.base_path.joinpath(self.config.source)
@@ -213,13 +213,14 @@ class UiClass(AbstractGenerator):
     def configure(self):
         classes = ["QWidget", "QDialog", "QMainWindow"]
         baseclass_name = choice_input(classes, "Base Class", selected_index=0)
+        check_assigned(baseclass_name, "baseclass_name")
+
         self.create_class = yesno_input("Create Implementation Class")
+
         class_name = text_input("Class name", initial_text=baseclass_name.lstrip("Q"))
+        check_assigned(class_name, "class_name")
 
         self.config = Config(class_name, baseclass_name)
-
-        check_assigned(class_name, "class_name")
-        check_assigned(baseclass_name, "baseclass_name")
 
     def generate(self):
         ui_path = self.base_path.joinpath(self.config.source)
