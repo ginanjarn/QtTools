@@ -17,6 +17,17 @@
 				}
 			},
 			{
+				"caption": "-"
+			},
+			{
+				"caption": "New Header Class",
+				"command": "qttools_create_class",
+				"args": {
+					"kind":"HEADER",
+					"paths": [],
+				}
+			},
+			{
 				"caption": "New Interface Class",
 				"command": "qttools_create_class",
 				"args": {

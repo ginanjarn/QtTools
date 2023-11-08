@@ -1,0 +1,10 @@
+#ifndef ${include_guard}
+#define ${include_guard}
+
+class ${class_name}
+{
+public:
+
+};
+
+#endif // ${include_guard}

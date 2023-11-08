@@ -155,6 +155,24 @@ class PlainClass(AbstractGenerator):
         write_snippet(header_path, get_template(self.header_template), self.config)
 
 
+class HeaderClass(AbstractGenerator):
+    header_template = "class_plainheader_header.txt"
+
+    def __init__(self, base_path: Path):
+        self.base_path = Path(base_path)
+        self.config: Config = None
+
+    def configure(self):
+        class_name = text_input("Class name")
+        check_assigned(class_name, "class_name")
+
+        self.config = Config(class_name)
+
+    def generate(self):
+        header_path = self.base_path.joinpath(self.config.header)
+        write_snippet(header_path, get_template(self.header_template), self.config)
+
+
 class InterfaceClass(AbstractGenerator):
     header_template = "class_interface_header.txt"
 
@@ -242,6 +260,7 @@ class ClassKind(Enum):
     QOBJECT = QObjectClass
     UI = UiClass
     INTERFACE = InterfaceClass
+    HEADER = HeaderClass
 
 
 class QttoolsCreateClassCommand(sublime_plugin.WindowCommand):
