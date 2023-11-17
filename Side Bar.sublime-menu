@@ -9,6 +9,16 @@
 		"children":
 		[
 			{
+				"caption": "Touch New File",
+				"command": "qttools_touch",
+				"args": {
+					"paths": [],
+				}
+			},
+			{
+				"caption": "-"
+			},
+			{
 				"caption": "New Class",
 				"command": "qttools_create_class",
 				"args": {

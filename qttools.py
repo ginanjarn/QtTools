@@ -292,3 +292,29 @@ class QttoolsCreateClassCommand(sublime_plugin.WindowCommand):
         generator: AbstractGenerator = kind.value(base_path)
         generator.configure()
         generator.generate()
+
+
+class QttoolsTouchCommand(sublime_plugin.WindowCommand):
+    """"""
+
+    def run(self, paths: list):
+        threading.Thread(target=self.run_task, kwargs={"paths": paths}).start()
+
+    def run_task(self, paths: list):
+        if not paths:
+            return
+
+        base_path = Path(paths[0])
+        if base_path.is_file():
+            base_path = base_path.parent
+
+        file_name = text_input("File name")
+        if not file_name:
+            return
+
+        file_path = base_path.joinpath(file_name)
+        if (parent := file_path.parent) and not parent.is_dir():
+            parent.mkdir(parents=True)
+
+        file_path.touch(exist_ok=True)
+        self.window.open_file(str(file_path))
