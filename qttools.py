@@ -7,6 +7,7 @@ from dataclasses import dataclass, asdict
 from abc import ABC, abstractmethod
 from enum import Enum
 from pathlib import Path
+from typing import List
 
 from string import Template
 
@@ -17,10 +18,19 @@ import sublime_plugin
 class QttoolsOpenDesignerCommand(sublime_plugin.TextCommand):
     def run(self, edit: sublime.Edit):
         file_path = self.view.file_name()
-        subprocess.Popen(["designer", file_path])
+        try:
+            subprocess.Popen(["designer", file_path])
+
+        except FileNotFoundError:
+            message = "Unable find Qt 'designer'.\n" "Set 'designer' directory in PATH."
+            sublime.error_message(message)
 
     def is_visible(self):
         return self.view.match_selector(0, "text.qt.ui")
+
+
+class Canceled(Exception):
+    """"""
 
 
 CURRENT_FILE_DIRECTORY = Path(__file__).parent
@@ -56,7 +66,7 @@ def text_input(caption: str, initial_text: str = "") -> str:
 
 
 def choice_input(
-    choices: list, placeholder: str = "", *, selected_index: int = -1, **kwargs
+    choices: List[str], placeholder: str = "", *, selected_index: int = -1, **kwargs
 ) -> str:
     temp = ""
     event = threading.Event()
@@ -116,11 +126,6 @@ def get_template(file_name: str) -> str:
     return path.read_text()
 
 
-def check_assigned(obj: object, name: str, /):
-    if not obj:
-        raise ValueError(f"{name} not assigned")
-
-
 class AbstractGenerator(ABC):
     """Abstract snippet generator"""
 
@@ -134,8 +139,8 @@ class AbstractGenerator(ABC):
 
 
 class PlainClass(AbstractGenerator):
-    source_template = "class_plain_source.txt"
-    header_template = "class_plain_header.txt"
+    source_template = "sources/class_plain.txt"
+    header_template = "headers/class_plain.txt"
 
     def __init__(self, base_path: Path):
         self.base_path = Path(base_path)
@@ -143,7 +148,8 @@ class PlainClass(AbstractGenerator):
 
     def configure(self):
         class_name = text_input("Class name")
-        check_assigned(class_name, "class_name")
+        if not class_name:
+            raise Canceled("class_name undefined")
 
         self.config = Config(class_name)
 
@@ -156,7 +162,7 @@ class PlainClass(AbstractGenerator):
 
 
 class HeaderClass(AbstractGenerator):
-    header_template = "class_plainheader_header.txt"
+    header_template = "headers/class_plainheader.txt"
 
     def __init__(self, base_path: Path):
         self.base_path = Path(base_path)
@@ -164,7 +170,8 @@ class HeaderClass(AbstractGenerator):
 
     def configure(self):
         class_name = text_input("Class name")
-        check_assigned(class_name, "class_name")
+        if not class_name:
+            raise Canceled("class_name undefined")
 
         self.config = Config(class_name)
 
@@ -174,7 +181,7 @@ class HeaderClass(AbstractGenerator):
 
 
 class InterfaceClass(AbstractGenerator):
-    header_template = "class_interface_header.txt"
+    header_template = "headers/class_interface.txt"
 
     def __init__(self, base_path: Path):
         self.base_path = Path(base_path)
@@ -182,7 +189,8 @@ class InterfaceClass(AbstractGenerator):
 
     def configure(self):
         class_name = text_input("Class name")
-        check_assigned(class_name, "class_name")
+        if not class_name:
+            raise Canceled("class_name undefined")
 
         self.config = Config(class_name)
 
@@ -192,8 +200,8 @@ class InterfaceClass(AbstractGenerator):
 
 
 class QObjectClass(AbstractGenerator):
-    source_template = "class_qobject_source.txt"
-    header_template = "class_qobject_header.txt"
+    source_template = "sources/class_qobject.txt"
+    header_template = "headers/class_qobject.txt"
 
     def __init__(self, base_path: Path):
         self.base_path = Path(base_path)
@@ -202,10 +210,12 @@ class QObjectClass(AbstractGenerator):
     def configure(self):
         classes = QOBJECT_CLASSES
         baseclass_name = choice_input(classes, "Base Class", selected_index=0)
-        check_assigned(baseclass_name, "baseclass_name")
+        if not baseclass_name:
+            raise Canceled("baseclass_name undefined")
 
         class_name = text_input("Class name", initial_text=baseclass_name.lstrip("Q"))
-        check_assigned(class_name, "class_name")
+        if not class_name:
+            raise Canceled("class_name undefined")
 
         self.config = Config(class_name, baseclass_name)
 
@@ -218,9 +228,8 @@ class QObjectClass(AbstractGenerator):
 
 
 class UiClass(AbstractGenerator):
-    source_template = "class_ui_source.txt"
-    header_template = "class_ui_header.txt"
-    ui_template = "form_{baseclass}.txt"
+    source_template = "sources/class_ui.txt"
+    header_template = "headers/class_ui.txt"
 
     def __init__(self, base_path: Path):
         self.base_path = Path(base_path)
@@ -229,22 +238,23 @@ class UiClass(AbstractGenerator):
         self.create_class = False
 
     def configure(self):
-        classes = ["QWidget", "QDialog", "QMainWindow"]
-        baseclass_name = choice_input(classes, "Base Class", selected_index=0)
-        check_assigned(baseclass_name, "baseclass_name")
+        ui_classes = ["QWidget", "QDialog", "QMainWindow"]
+        baseclass_name = choice_input(ui_classes, "Base Class", selected_index=0)
+        if not baseclass_name:
+            raise Canceled("baseclass_name undefined")
 
         self.create_class = yesno_input("Create Implementation Class")
 
         class_name = text_input("Class name", initial_text=baseclass_name.lstrip("Q"))
-        check_assigned(class_name, "class_name")
+        if not class_name:
+            raise Canceled("class_name undefined")
 
         self.config = Config(class_name, baseclass_name)
 
     def generate(self):
-        ui_path = self.base_path.joinpath(self.config.source)
-        ui_template = self.ui_template.format(
-            baseclass=self.config.baseclass_name.lower()
-        )
+        ui_path = self.base_path.joinpath(self.config.class_name + ".ui")
+        baseclass_name = self.config.baseclass_name.lower()
+        ui_template = f"ui/form_{baseclass_name}.txt"
         write_snippet(ui_path, get_template(ui_template), self.config)
 
         if self.create_class:
@@ -281,7 +291,7 @@ class QttoolsCreateClassCommand(sublime_plugin.WindowCommand):
             target=self.run_task, kwargs={"kind": kind, "paths": paths}
         ).start()
 
-    def run_task(self, kind: ClassKind, paths: list):
+    def run_task(self, kind: ClassKind, paths: List[str]):
         if not paths:
             return
 
@@ -290,8 +300,12 @@ class QttoolsCreateClassCommand(sublime_plugin.WindowCommand):
             base_path = base_path.parent
 
         generator: AbstractGenerator = kind.value(base_path)
-        generator.configure()
-        generator.generate()
+        try:
+            generator.configure()
+        except Canceled as err:
+            print(err)
+        else:
+            generator.generate()
 
 
 class QttoolsTouchCommand(sublime_plugin.WindowCommand):
