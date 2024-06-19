@@ -1,5 +1,6 @@
 """QT Tools"""
 
+import os
 import subprocess
 import threading
 
@@ -13,6 +14,16 @@ from string import Template
 
 import sublime
 import sublime_plugin
+
+
+def get_project_folder(path: str) -> str:
+    folders = sublime.active_window().folders()
+
+    candidates = [folder for folder in folders if path.startswith(folder)]
+    if candidates:
+        return max(candidates)
+
+    raise ValueError("unable find project folders")
 
 
 class QttoolsOpenDesignerCommand(sublime_plugin.TextCommand):
@@ -276,30 +287,24 @@ class ClassKind(Enum):
 class QttoolsCreateClassCommand(sublime_plugin.WindowCommand):
     """"""
 
-    def run(self, kind: str, paths: list):
+    def run(self, kind: str, dirs: "list[str]"):
         try:
             kind = ClassKind[kind]
         except KeyError:
             print("Error! Valid 'kind' argument:", [c.name for c in ClassKind])
             return
 
-        if not paths:
-            print("Error! Argument 'paths' must assiged.")
+        if not dirs:
+            print("Error! Argument 'dirs' must assiged.")
             return
 
-        threading.Thread(
-            target=self.run_task, kwargs={"kind": kind, "paths": paths}
-        ).start()
+        threading.Thread(target=self.run_task, args=(kind, dirs)).start()
 
-    def run_task(self, kind: ClassKind, paths: List[str]):
-        if not paths:
-            return
+    def run_task(self, cls_kind: ClassKind, dirs: "list[str]"):
 
-        base_path = Path(paths[0])
-        if base_path.is_file():
-            base_path = base_path.parent
+        base_path = Path(dirs[0])
+        generator: AbstractGenerator = cls_kind.value(base_path)
 
-        generator: AbstractGenerator = kind.value(base_path)
         try:
             generator.configure()
         except Canceled as err:
@@ -307,28 +312,36 @@ class QttoolsCreateClassCommand(sublime_plugin.WindowCommand):
         else:
             generator.generate()
 
+    def is_visible(self, kind: "ClassKind", dirs: "list[str]"):
+        return len(dirs) == 1
+
 
 class QttoolsTouchCommand(sublime_plugin.WindowCommand):
     """"""
 
-    def run(self, paths: list):
-        threading.Thread(target=self.run_task, kwargs={"paths": paths}).start()
-
-    def run_task(self, paths: list):
-        if not paths:
+    def run(self, dirs: "list[str]"):
+        if not dirs:
             return
 
-        base_path = Path(paths[0])
-        if base_path.is_file():
-            base_path = base_path.parent
+        threading.Thread(target=self.run_task, args=(dirs,)).start()
 
-        file_name = text_input("File name")
-        if not file_name:
+    def run_task(self, dirs: "list[str]"):
+
+        prefix_path = dirs[0]
+        project_folder = get_project_folder(prefix_path)
+        rel_prefix_path = f"{prefix_path[len(project_folder) + 1 :]}{os.sep}"
+
+        input_path = text_input("File name", initial_text=rel_prefix_path)
+        if not input_path or input_path == rel_prefix_path:
             return
 
-        file_path = base_path.joinpath(file_name)
-        if (parent := file_path.parent) and not parent.is_dir():
-            parent.mkdir(parents=True)
+        file_path = Path(project_folder).joinpath(input_path)
+
+        # create parent if not exists
+        file_path.parent.mkdir(parents=True, exist_ok=True)
 
         file_path.touch(exist_ok=True)
         self.window.open_file(str(file_path))
+
+    def is_visible(self, dirs: "list[str]"):
+        return len(dirs) == 1

@@ -12,7 +12,7 @@
 				"caption": "Touch New File",
 				"command": "qttools_touch",
 				"args": {
-					"paths": [],
+					"dirs": [],
 				}
 			},
 			{
@@ -23,7 +23,7 @@
 				"command": "qttools_create_class",
 				"args": {
 					"kind":"PLAIN",
-					"paths": [],
+					"dirs": [],
 				}
 			},
 			{
@@ -34,7 +34,7 @@
 				"command": "qttools_create_class",
 				"args": {
 					"kind":"HEADER",
-					"paths": [],
+					"dirs": [],
 				}
 			},
 			{
@@ -42,7 +42,7 @@
 				"command": "qttools_create_class",
 				"args": {
 					"kind":"INTERFACE",
-					"paths": [],
+					"dirs": [],
 				}
 			},
 			{
@@ -53,7 +53,7 @@
 				"command": "qttools_create_class",
 				"args": {
 					"kind":"QOBJECT",
-					"paths": [],
+					"dirs": [],
 				}
 			},
 			{
@@ -64,7 +64,7 @@
 				"command": "qttools_create_class",
 				"args": {
 					"kind":"UI",
-					"paths": [],
+					"dirs": [],
 				}
 			},
 		]
