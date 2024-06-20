@@ -303,7 +303,8 @@ class QttoolsCreateClassCommand(sublime_plugin.WindowCommand):
     def run_task(self, cls_kind: ClassKind, dirs: "list[str]"):
 
         base_path = Path(dirs[0])
-        generator: AbstractGenerator = cls_kind.value(base_path)
+        constructor = cls_kind.value
+        generator: AbstractGenerator = constructor(base_path)
 
         try:
             generator.configure()
