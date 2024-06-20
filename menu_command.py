@@ -330,7 +330,11 @@ class QttoolsTouchCommand(sublime_plugin.WindowCommand):
 
         prefix_path = dirs[0]
         project_folder = get_project_folder(prefix_path)
-        rel_prefix_path = f"{prefix_path[len(project_folder) + 1 :]}{os.sep}"
+        rel_prefix_path = prefix_path[len(project_folder) + 1 :]
+        rel_prefix_path = (
+            # append 'os.sep' if not project_folder
+            f"{rel_prefix_path}{os.sep}" if rel_prefix_path else rel_prefix_path
+        )
 
         input_path = text_input("File name", initial_text=rel_prefix_path)
         if not input_path or input_path == rel_prefix_path:
