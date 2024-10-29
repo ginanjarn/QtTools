@@ -93,87 +93,67 @@ def decorate_handler(cls, method_name):
     """
 
 
-def unload_module(module):
-    ...
+def unload_module(module): ...
 
 
-def unload_plugin(modulename):
-    ...
+def unload_plugin(modulename): ...
 
 
-def reload_plugin(modulename):
-    ...
+def reload_plugin(modulename): ...
 
 
-def load_module(m):
-    ...
+def load_module(m): ...
 
 
-def synthesize_on_activated_async():
-    ...
+def synthesize_on_activated_async(): ...
 
 
-def notify_application_commands():
-    ...
+def notify_application_commands(): ...
 
 
-def create_application_commands():
-    ...
+def create_application_commands(): ...
 
 
-def create_window_commands(window_id):
-    ...
+def create_window_commands(window_id): ...
 
 
-def create_text_commands(view_id):
-    ...
+def create_text_commands(view_id): ...
 
 
-def on_api_ready():
-    ...
+def on_api_ready(): ...
 
 
-def is_view_event_listener_applicable(cls, view):
-    ...
+def is_view_event_listener_applicable(cls, view): ...
 
 
-def create_view_event_listeners(classes, view):
-    ...
+def create_view_event_listeners(classes, view): ...
 
 
-def check_view_event_listeners(view):
-    ...
+def check_view_event_listeners(view): ...
 
 
-def attach_view(view):
-    ...
+def attach_view(view): ...
 
 
 check_all_view_event_listeners_scheduled: bool = ...
 
 
-def check_all_view_event_listeners():
-    ...
+def check_all_view_event_listeners(): ...
 
 
-def detach_view(view):
-    ...
+def detach_view(view): ...
 
 
-def find_view_event_listener(view, cls):
-    ...
+def find_view_event_listener(view, cls): ...
 
 
-def attach_buffer(buf):
-    ...
+def attach_buffer(buf): ...
 
 
-def check_text_change_listeners(buf):
-    ...
+def check_text_change_listeners(buf): ...
 
 
-def detach_buffer(buf):
-    ...
+def detach_buffer(buf): ...
 
 
 def plugin_module_for_obj(obj):
@@ -183,20 +163,16 @@ def plugin_module_for_obj(obj):
     ...
 
 
-def el_callbacks(name, listener_only=False):
-    ...
+def el_callbacks(name, listener_only=False): ...
 
 
-def vel_callbacks(v, name, listener_only=False):
-    ...
+def vel_callbacks(v, name, listener_only=False): ...
 
 
-def run_view_callbacks(name, view_id, *args, el_only=False):
-    ...
+def run_view_callbacks(name, view_id, *args, el_only=False): ...
 
 
-def run_window_callbacks(name, window_id, *args):
-    ...
+def run_window_callbacks(name, window_id, *args): ...
 
 
 def on_init(module):
@@ -213,232 +189,179 @@ def on_init(module):
     """
 
 
-def on_new(view_id):
-    ...
+def on_new(view_id): ...
 
 
-def on_new_async(view_id):
-    ...
+def on_new_async(view_id): ...
 
 
-def on_new_buffer(buffer_id):
-    ...
+def on_new_buffer(buffer_id): ...
 
 
-def on_new_buffer_async(buffer_id):
-    ...
+def on_new_buffer_async(buffer_id): ...
 
 
-def on_associate_buffer(buffer_id):
-    ...
+def on_associate_buffer(buffer_id): ...
 
 
-def on_associate_buffer_async(buffer_id):
-    ...
+def on_associate_buffer_async(buffer_id): ...
 
 
-def on_close_buffer(buffer_id):
-    ...
+def on_close_buffer(buffer_id): ...
 
 
-def on_close_buffer_async(buffer_id):
-    ...
+def on_close_buffer_async(buffer_id): ...
 
 
-def on_clone(view_id):
-    ...
+def on_clone(view_id): ...
 
 
-def on_clone_async(view_id):
-    ...
+def on_clone_async(view_id): ...
 
 
 class Summary:
-    def __init__(self):
-        ...
+    max: float
+    sum: float
+    count: int
 
-    def record(self, x):
-        ...
+    def __init__(self): ...
 
-
-def get_profiling_data():
-    ...
+    def record(self, x): ...
 
 
-def on_load(view_id):
-    ...
+def get_profiling_data(): ...
 
 
-def on_load_async(view_id):
-    ...
+def on_load(view_id): ...
 
 
-def on_revert(view_id):
-    ...
+def on_load_async(view_id): ...
 
 
-def on_revert_async(view_id):
-    ...
+def on_revert(view_id): ...
 
 
-def on_reload(view_id):
-    ...
+def on_revert_async(view_id): ...
 
 
-def on_reload_async(view_id):
-    ...
+def on_reload(view_id): ...
 
 
-def on_pre_close(view_id):
-    ...
+def on_reload_async(view_id): ...
 
 
-def on_close(view_id):
-    ...
+def on_pre_close(view_id): ...
 
 
-def on_pre_save(view_id):
-    ...
+def on_close(view_id): ...
 
 
-def on_pre_save_async(view_id):
-    ...
+def on_pre_save(view_id): ...
 
 
-def on_post_save(view_id):
-    ...
+def on_pre_save_async(view_id): ...
 
 
-def on_post_save_async(view_id):
-    ...
+def on_post_save(view_id): ...
 
 
-def on_pre_move(view_id):
-    ...
+def on_post_save_async(view_id): ...
 
 
-def on_post_move(view_id):
-    ...
+def on_pre_move(view_id): ...
 
 
-def on_post_move_async(view_id):
-    ...
+def on_post_move(view_id): ...
 
 
-def on_modified(view_id):
-    ...
+def on_post_move_async(view_id): ...
 
 
-def on_modified_async(view_id):
-    ...
+def on_modified(view_id): ...
 
 
-def on_selection_modified(view_id):
-    ...
+def on_modified_async(view_id): ...
 
 
-def on_selection_modified_async(view_id):
-    ...
+def on_selection_modified(view_id): ...
 
 
-def on_activated(view_id):
-    ...
+def on_selection_modified_async(view_id): ...
 
 
-def on_activated_async(view_id):
-    ...
+def on_activated(view_id): ...
 
 
-def on_deactivated(view_id):
-    ...
+def on_activated_async(view_id): ...
 
 
-def on_deactivated_async(view_id):
-    ...
+def on_deactivated(view_id): ...
 
 
-def on_query_context(view_id, key, operator, operand, match_all):
-    ...
+def on_deactivated_async(view_id): ...
 
 
-def normalise_completion(c):
-    ...
+def on_query_context(view_id, key, operator, operand, match_all): ...
+
+
+def normalise_completion(c): ...
 
 
 class MultiCompletionList:
-    def __init__(self, num_completion_lists, view_id, req_id):
-        ...
+    def __init__(self, num_completion_lists, view_id, req_id): ...
 
-    def completions_ready(self, completions, flags):
-        ...
+    def completions_ready(self, completions, flags): ...
 
 
-def on_query_completions(view_id, req_id, prefix, locations):
-    ...
+def on_query_completions(view_id, req_id, prefix, locations): ...
 
 
-def on_hover(view_id, point, hover_zone):
-    ...
+def on_hover(view_id, point, hover_zone): ...
 
 
-def on_text_command(view_id, name, args):
-    ...
+def on_text_command(view_id, name, args): ...
 
 
-def on_window_command(window_id, name, args):
-    ...
+def on_window_command(window_id, name, args): ...
 
 
-def on_post_text_command(view_id, name, args):
-    ...
+def on_post_text_command(view_id, name, args): ...
 
 
-def on_post_window_command(window_id, name, args):
-    ...
+def on_post_window_command(window_id, name, args): ...
 
 
-def on_new_project(window_id):
-    ...
+def on_new_project(window_id): ...
 
 
-def on_new_project_async(window_id):
-    ...
+def on_new_project_async(window_id): ...
 
 
-def on_load_project(window_id):
-    ...
+def on_load_project(window_id): ...
 
 
-def on_load_project_async(window_id):
-    ...
+def on_load_project_async(window_id): ...
 
 
-def on_pre_save_project(window_id):
-    ...
+def on_pre_save_project(window_id): ...
 
 
-def on_post_save_project(window_id):
-    ...
+def on_post_save_project(window_id): ...
 
 
-def on_post_save_project_async(window_id):
-    ...
+def on_post_save_project_async(window_id): ...
 
 
-def on_pre_close_project(window_id):
-    ...
+def on_pre_close_project(window_id): ...
 
 
-def on_new_window(window_id):
-    ...
+def on_new_window(window_id): ...
 
 
-def on_new_window_async(window_id):
-    ...
+def on_new_window_async(window_id): ...
 
 
-def on_pre_close_window(window_id):
-    ...
+def on_pre_close_window(window_id): ...
 
 
 def on_exit(log_path):
@@ -520,8 +443,7 @@ class CommandInputHandler:
 class BackInputHandler(CommandInputHandler):
     """ """
 
-    def name(self):
-        ...
+    def name(self): ...
 
 
 class TextInputHandler(CommandInputHandler):
@@ -554,9 +476,14 @@ class ListInputHandler(CommandInputHandler):
 
     def list_items(
         self,
-    ) -> list[str] | tuple[list[str], int] | list[tuple[str, Value]] | tuple[
-        list[tuple[str, Value]], int
-    ] | list[sublime.ListInputItem] | tuple[list[sublime.ListInputItem], int]:
+    ) -> (
+        list[str]
+        | tuple[list[str], int]
+        | list[tuple[str, Value]]
+        | tuple[list[tuple[str, Value]], int]
+        | list[sublime.ListInputItem]
+        | tuple[list[sublime.ListInputItem], int]
+    ):
         """
         This method should return the items to show in the list.
 
@@ -620,8 +547,7 @@ class Command:
         caption is provided. Return :py:`None` to get the default description.
         """
 
-    def filter_args(self, args):
-        ...
+    def filter_args(self, args): ...
 
     def want_event(self) -> bool:
         """
@@ -672,8 +598,7 @@ class WindowCommand(Command):
 
     window: sublime.Window
 
-    def __init__(self, window: sublime.Window):
-        ...
+    def __init__(self, window: sublime.Window): ...
 
     def run(self):
         """:meta private:"""
@@ -687,8 +612,7 @@ class TextCommand(Command):
 
     view: sublime.View
 
-    def __init__(self, view: sublime.View):
-        ...
+    def __init__(self, view: sublime.View): ...
 
     def run(self, edit: sublime.Edit):
         """
@@ -699,7 +623,6 @@ class TextCommand(Command):
 
 class EventListener:
     def on_init(self, views: List[View]):
-
         """Called once with a list of views that were loaded before the EventListener
         was instantiated
 
@@ -707,7 +630,6 @@ class EventListener:
         """
 
     def on_exit(self):
-
         """Called once after the API has shut down, immediately before the
         plugin_host process exits
 
@@ -715,24 +637,20 @@ class EventListener:
         """
 
     def on_new(self, view: View):
-
         """Called when a new file is created."""
 
     def on_new_async(self, view: View):
-
         """Called when a new buffer is created. Runs in a separate thread, and does
         not block the application.
         """
 
     def on_associate_buffer(self, buffer: View):
-
         """Called when a buffer is associated with a file. buffer will be a Buffer object.
 
         .. since:: 4084
         """
 
     def on_associate_buffer_async(self, buffer: View):
-
         """Called when a buffer is associated with file. Runs in a separate thread,
         and does not block the application. buffer will be a Buffer object.
 
@@ -740,33 +658,27 @@ class EventListener:
         """
 
     def on_clone(self, view: View):
-
         """Called when a view is cloned from an existing one."""
 
     def on_clone_async(self, view: View):
-
         """Called when a view is cloned from an existing one. Runs in a separate
         thread, and does not block the application.
         """
 
     def on_load(self, view: View):
-
         """Called when the file is finished loading."""
 
     def on_load_async(self, view: View):
-
         """Called when the file is finished loading. Runs in a separate thread, and
         does not block the application."""
 
     def on_reload(self, view: View):
-
         """Called when the View is reloaded.
 
         .. since:: 4050
         """
 
     def on_reload_async(self, view: View):
-
         """Called when the View is reloaded. Runs in a separate thread, and does
         not block the application.
 
@@ -774,14 +686,12 @@ class EventListener:
         """
 
     def on_revert(self, view: View):
-
         """Called when the View is reverted.
 
         .. since:: 4050
         """
 
     def on_revert_async(self, view: View):
-
         """Called when the View is reverted. Runs in a separate thread, and does
         not block the application.
 
@@ -789,7 +699,6 @@ class EventListener:
         """
 
     def on_pre_move(self, view: View):
-
         """Called right before a view is moved between two windows, passed the View
         object.
 
@@ -797,7 +706,6 @@ class EventListener:
         """
 
     def on_post_move(self, view: View):
-
         """Called right after a view is moved between two windows, passed the View
         object.
 
@@ -805,7 +713,6 @@ class EventListener:
         """
 
     def on_post_move_async(self, view: View):
-
         """Called right after a view is moved between two windows, passed the View
         object. Runs in a separate thread, and does not block the application.
 
@@ -813,78 +720,63 @@ class EventListener:
         """
 
     def on_pre_close(self, view: View):
-
         """Called when a view is about to be closed. The view will still be in the
         window at this point.
         """
 
     def on_close(self, view: View):
-
         """Called when a view is closed (note, there may still be other views into
         the same buffer).
         """
 
     def on_pre_save(self, view: View):
-
         """Called just before a view is saved."""
 
     def on_pre_save_async(self, view: View):
-
         """Called just before a view is saved. Runs in a separate thread, and does
         not block the application."""
 
     def on_post_save(self, view: View):
-
         """Called after a view has been saved."""
 
     def on_post_save_async(self, view: View):
-
         """Called after a view has been saved. Runs in a separate thread, and does
         not block the application.
         """
 
     def on_modified(self, view: View):
-
         """Called after changes have been made to a view."""
 
     def on_modified_async(self, view: View):
-
         """Called after changes have been made to a view. Runs in a separate
         thread, and does not block the application.
         """
 
     def on_selection_modified(self, view: View):
-
         """Called after the selection has been modified in a view."""
 
     def on_selection_modified_async(self, view: View):
-
         """Called after the selection has been modified in a view. Runs in a
         separate thread, and does not block the application.
         """
 
     def on_activated(self, view: View):
-
         """Called when a view gains input focus."""
 
     def on_activated_async(self, view: View):
-
         """Called when a view gains input focus. Runs in a separate thread, and
         does not block the application.
         """
 
     def on_deactivated(self, view: View):
-
         """Called when a view loses input focus."""
 
     def on_deactivated_async(self, view: View):
-
         """Called when a view loses input focus. Runs in a separate thread, and
         does not block the application.
         """
 
     def on_hover(self, view: View, point: Point, hover_zone: HoverZone):
-
         """Called when the user's mouse hovers over the view for a short period.
 
         :param view: The view
@@ -904,7 +796,6 @@ class EventListener:
         operand: str,
         match_all: bool,
     ) -> Optional[bool]:
-
         """Called when determining to trigger a key binding with the given context
         key. If the plugin knows how to respond to the context, it should
         return either True of False. If the context is unknown, it should
@@ -935,7 +826,6 @@ class EventListener:
         Tuple[List[CompletionValue], AutoCompleteFlags],
         CompletionList,
     ]:
-
         """Called whenever completions are to be presented to the user.
 
         :param prefix: The text already typed by the user.
@@ -951,7 +841,6 @@ class EventListener:
     def on_text_command(
         self, view: View, command_name: str, args: CommandArgs
     ) -> (str, CommandArgs):
-
         """Called when a text command is issued.
 
         The listener may return a (command, arguments) tuple to rewrite the command,
@@ -961,7 +850,6 @@ class EventListener:
     def on_window_command(
         self, window: Window, command_name: str, args: CommandArgs
     ) -> (str, CommandArgs):
-
         """Called when a window command is issued.
         The listener may return a (command, arguments) tuple to rewrite the command,
         or None to run the command unmodified.
@@ -976,14 +864,12 @@ class EventListener:
         """Called after a window command has been executed."""
 
     def on_new_window(self, window: Window):
-
         """Called when a window is created, passed the Window object.
 
         .. since:: 4050
         """
 
     def on_new_window_async(self, window: Window):
-
         """Called when a window is created, passed the Window object. Runs in a separate thread,
         and does not block the application.
 
@@ -991,21 +877,18 @@ class EventListener:
         """
 
     def on_pre_close_window(self, window: Window):
-
         """Called right before a window is closed, passed the Window object.
 
         .. since:: 4050
         """
 
     def on_new_project(self, window: Window):
-
         """Called right after a new project is created, passed the Window object.
 
         .. since:: 4050
         """
 
     def on_new_project_async(self, window: Window):
-
         """Called right after a new project is created, passed the Window object.
         Runs in a separate thread, and does not block the application.
 
@@ -1013,14 +896,12 @@ class EventListener:
         """
 
     def on_load_project(self, window: Window):
-
         """Called right after a project is loaded, passed the Window object.
 
         .. since:: 4050
         """
 
     def on_load_project_async(self, window: Window):
-
         """Called right after a project is loaded, passed the Window object.
         Runs in a separate thread, and does not block the application.
 
@@ -1028,21 +909,18 @@ class EventListener:
         """
 
     def on_pre_save_project(self, window: Window):
-
         """Called right before a project is saved, passed the Window object.
 
         .. since:: 4050
         """
 
     def on_post_save_project(self, window: Window):
-
         """Called right after a project is saved, passed the Window object.
 
         .. since:: 4050
         """
 
     def on_post_save_project_async(self, window: Window):
-
         """Called right after a project is saved, passed the Window object.
         Runs in a separate thread, and does not block the application.
 
@@ -1050,7 +928,6 @@ class EventListener:
         """
 
     def on_pre_close_project(self, window: Window):
-
         """Called right before a project is closed, passed the Window object."""
 
 
@@ -1062,14 +939,12 @@ class ViewEventListener:
     """
 
     def on_load(self):
-
         """Called when the file is finished loading.
 
         .. since:: 3155
         """
 
     def on_load_async(self):
-
         """Same as `on_load` but runs in a separate thread, not blocking the
         application.
 
@@ -1077,14 +952,12 @@ class ViewEventListener:
         """
 
     def on_reload(self):
-
         """Called when the file is reloaded.
 
         .. since:: 4050
         """
 
     def on_reload_async(self):
-
         """Same as `on_reload` but runs in a separate thread, not blocking the
         application.
 
@@ -1092,14 +965,12 @@ class ViewEventListener:
         """
 
     def on_revert(self):
-
         """Called when the file is reverted.
 
         .. since:: 4050
         """
 
     def on_revert_async(self):
-
         """Same as `on_revert` but runs in a separate thread, not blocking the
         application.
 
@@ -1107,21 +978,18 @@ class ViewEventListener:
         """
 
     def on_pre_move(self):
-
         """Called right before a view is moved between two windows.
 
         .. since:: 4050
         """
 
     def on_post_move(self):
-
         """Called right after a view is moved between two windows.
 
         .. since:: 4050
         """
 
     def on_post_move_async(self):
-
         """Same as `on_post_move` but runs in a separate thread, not blocking the
         application.
 
@@ -1129,7 +997,6 @@ class ViewEventListener:
         """
 
     def on_pre_close(self):
-
         """Called when a view is about to be closed. The view will still be in the
         window at this point.
 
@@ -1137,7 +1004,6 @@ class ViewEventListener:
         """
 
     def on_close(self):
-
         """Called when a view is closed (note, there may still be other views into
         the same buffer).
 
@@ -1145,14 +1011,12 @@ class ViewEventListener:
         """
 
     def on_pre_save(self):
-
         """Called just before a view is saved.
 
         .. since:: 3155
         """
 
     def on_pre_save_async(self):
-
         """Same as `on_pre_save` but runs in a separate thread, not blocking the
         application.
 
@@ -1160,14 +1024,12 @@ class ViewEventListener:
         """
 
     def on_post_save(self):
-
         """Called after a view has been saved.
 
         .. since:: 3155
         """
 
     def on_post_save_async(self):
-
         """Same as `on_post_save` but runs in a separate thread, not blocking the
         application.
 
@@ -1175,44 +1037,35 @@ class ViewEventListener:
         """
 
     def on_modified(self):
-
         """Called after changes have been made to the view."""
 
     def on_modified_async(self):
-
         """Same as `on_modified` but runs in a separate thread, not blocking the
         application.
         """
 
     def on_selection_modified(self):
-
         """Called after the selection has been modified in the view."""
 
     def on_selection_modified_async(self):
-
         """Called after the selection has been modified in the view. Runs in a separate thread,
         and does not block the application."""
 
     def on_activated(self):
-
         """Called when a view gains input focus."""
 
     def on_activated_async(self):
-
         """Called when the view gains input focus. Runs in a separate thread, and does not
         block the application."""
 
     def on_deactivated(self):
-
         """Called when the view loses input focus."""
 
     def on_deactivated_async(self):
-
         """Called when the view loses input focus. Runs in a separate thread,
         and does not block the application."""
 
     def on_hover(self, point: Point, hover_zone: HoverZone):
-
         """Called when the user's mouse hovers over the view for a short period.
 
         :param point:
@@ -1226,7 +1079,6 @@ class ViewEventListener:
     def on_query_context(
         self, key: str, operator: QueryOperator, operand: str, match_all: bool
     ) -> Optional[bool]:
-
         """Called when determining to trigger a key binding with the given context
         key. If the plugin knows how to respond to the context, it should
         return either True of False. If the context is unknown, it should
@@ -1246,15 +1098,12 @@ class ViewEventListener:
                   return ``None``.
         """
 
-    def on_query_completions(
-        self, prefix: str, locations: List[Point]
-    ) -> Union[
+    def on_query_completions(self, prefix: str, locations: List[Point]) -> Union[
         None,
         List[CompletionValue],
         Tuple[List[CompletionValue], AutoCompleteFlags],
         CompletionList,
     ]:
-
         """Called whenever completions are to be presented to the user.
 
         :param prefix: The text already typed by the user.
@@ -1270,7 +1119,6 @@ class ViewEventListener:
     def on_text_command(
         self, command_name: str, args: CommandArgs
     ) -> Tuple[str, CommandArgs]:
-
         """Called when a text command is issued.
 
         The listener may return a ``(command, arguments)`` tuple to rewrite the
@@ -1280,7 +1128,6 @@ class ViewEventListener:
         """
 
     def on_post_text_command(self, command_name: str, args: CommandArgs):
-
         """Called after a text command has been executed."""
 
     @classmethod
@@ -1298,8 +1145,7 @@ class ViewEventListener:
 
     view: sublime.View
 
-    def __init__(self, view: sublime.View):
-        ...
+    def __init__(self, view: sublime.View): ...
 
 
 class TextChangeListener:
@@ -1313,37 +1159,31 @@ class TextChangeListener:
     buffer: sublime.Buffer
 
     def on_text_changed(self, changes: List[TextChange]):
-
         """Called once after changes has been made to a buffer, with detailed information
         about what has changed.
         """
 
     def on_text_changed_async(self, changes: List[TextChange]):
-
         """Same as `on_text_changed` but runs in a separate thread, not blocking the application."""
 
     def on_revert(self):
-
         """Called when the buffer is reverted.
 
         A revert does not trigger text changes. If the contents of the buffer
         are required here use `View.substr`."""
 
     def on_revert_async(self):
-
         """Same as `on_revert` but runs in a separate thread, not blocking the
         application.
         """
 
     def on_reload(self):
-
         """Called when the buffer is reloaded.
 
         A reload does not trigger text changes. If the contents of the buffer
         are required here use `View.substr`."""
 
     def on_reload_async(self):
-
         """Same as `on_reload` but runs in a separate thread, not blocking the
         application.
         """
@@ -1354,8 +1194,7 @@ class TextChangeListener:
         :returns: Whether this listener should apply to the provided buffer.
         """
 
-    def __init__(self):
-        ...
+    def __init__(self): ...
 
     def detach(self):
         """
@@ -1385,8 +1224,7 @@ class TextChangeListener:
 class MultizipImporter(importlib.abc.MetaPathFinder):
     """:meta private:"""
 
-    def __init__(self):
-        ...
+    def __init__(self): ...
 
     def find_spec(self, fullname, path, target=None):
         """
@@ -1470,6 +1308,9 @@ class ZipLoader(importlib.abc.InspectLoader):
     :meta private:
     """
 
+    zippath: str
+    name: str
+
     def __init__(self, zippath):
         """
         :param zippath:
@@ -1550,9 +1391,7 @@ override_path: Any = ...
 multi_importer: MultizipImporter = ...
 
 
-def update_compressed_packages(pkgs):
-    ...
+def update_compressed_packages(pkgs): ...
 
 
-def set_override_path(path):
-    ...
+def set_override_path(path): ...
