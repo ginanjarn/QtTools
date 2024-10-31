@@ -10,8 +10,9 @@
 		[
 			{
 				"caption": "Touch New File",
-				"command": "qttools_touch",
+				"command": "qttools_create_file",
 				"args": {
+					"kind":"empty",
 					"dirs": [],
 				}
 			},
@@ -22,26 +23,15 @@
 				"caption": "New Class",
 				"command": "qttools_create_class",
 				"args": {
-					"kind":"PLAIN",
+					"kind":"plain",
 					"dirs": [],
 				}
-			},
-			{
-				"caption": "-"
 			},
 			{
 				"caption": "New Header Class",
 				"command": "qttools_create_class",
 				"args": {
-					"kind":"HEADER",
-					"dirs": [],
-				}
-			},
-			{
-				"caption": "New Interface Class",
-				"command": "qttools_create_class",
-				"args": {
-					"kind":"INTERFACE",
+					"kind":"header",
 					"dirs": [],
 				}
 			},
@@ -52,7 +42,7 @@
 				"caption": "New QObject Class",
 				"command": "qttools_create_class",
 				"args": {
-					"kind":"QOBJECT",
+					"kind":"qobject",
 					"dirs": [],
 				}
 			},
@@ -60,10 +50,18 @@
 				"caption": "-"
 			},
 			{
-				"caption": "New Designer Form",
+				"caption": "New Gui Class",
 				"command": "qttools_create_class",
 				"args": {
-					"kind":"UI",
+					"kind":"gui",
+					"dirs": [],
+				}
+			},
+			{
+				"caption": "New Designer Form",
+				"command": "qttools_create_file",
+				"args": {
+					"kind":"ui_design",
 					"dirs": [],
 				}
 			},

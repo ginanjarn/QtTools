@@ -3,9 +3,7 @@
 
 class ${class_name}
 {
-public:
-	virtual ~${class_name}() = default;
-
+	// code
 };
 
 #endif // ${include_guard}

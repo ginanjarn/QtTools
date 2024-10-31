@@ -1,5 +1,5 @@
-#include "${header}"
-#include "ui_${header}"
+#include "${header_name}"
+#include "ui_${header_name}"
 
 ${class_name}::${class_name}(QWidget *parent) :
     ${baseclass_name}(parent),

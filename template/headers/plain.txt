@@ -4,6 +4,7 @@
 class ${class_name}
 {
 public:
+	${class_name}();
 
 };
 
