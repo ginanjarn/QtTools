@@ -9,4 +9,10 @@
 		"id" : "qttools",
 		"command" : "qttools_open_designer",
 	},
+	{
+		"caption" : "Generate Code",
+		"mnemonic" : "G",
+		"id" : "qttools",
+		"command" : "qttools_generate_code",
+	},
 ]

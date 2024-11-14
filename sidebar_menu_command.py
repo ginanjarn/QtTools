@@ -1,5 +1,6 @@
 """QT Tools"""
 
+import os
 import subprocess
 import threading
 
@@ -14,6 +15,8 @@ from string import Template as StringTemplate
 import sublime
 import sublime_plugin
 
+UI_VIEW_SELECTOR = "text.qt.ui"
+
 
 def get_project_folder(path: str) -> str:
     folders = sublime.active_window().folders()
@@ -23,6 +26,14 @@ def get_project_folder(path: str) -> str:
         return max(candidates)
 
     raise ValueError("unable find project folders")
+
+
+if os.name == "nt":
+    # if on Windows, hide process window
+    STARTUPINFO = subprocess.STARTUPINFO()
+    STARTUPINFO.dwFlags |= subprocess.SW_HIDE | subprocess.STARTF_USESHOWWINDOW
+else:
+    STARTUPINFO = None
 
 
 class QttoolsOpenDesignerCommand(sublime_plugin.TextCommand):
@@ -37,6 +48,59 @@ class QttoolsOpenDesignerCommand(sublime_plugin.TextCommand):
 
     def is_visible(self):
         return self.view.match_selector(0, "text.qt.ui")
+
+
+class QttoolsGenerateCodeCommand(sublime_plugin.TextCommand):
+    suffix_map = {
+        "cpp": ".h",
+        "python": ".py",
+    }
+
+    def run(self, edit: sublime.Edit):
+        thread = threading.Thread(target=self._run, args=(edit,))
+        thread.start()
+
+    def _run(self, edit: sublime.Edit):
+        file_name = self.view.file_name()
+        language_options = list(self.suffix_map.keys())
+        language = ChoiceInput(
+            language_options, placeholder="Target Language"
+        ).get_value()
+        if not language:
+            return
+
+        file_path = Path(file_name)
+        default = file_path.stem + self.suffix_map[language]
+        output_name = TextInput("Output name", initial_text=default).get_value()
+        if not output_name:
+            return
+
+        try:
+            process = subprocess.run(
+                ["uic", "-g", language, file_name],
+                startupinfo=STARTUPINFO,
+                capture_output=True,
+            )
+
+        except FileNotFoundError:
+            message = "Unable find Qt 'uic'.\nSet 'uic' directory in PATH."
+            sublime.error_message(message)
+
+        def normalize_newline(text: bytes) -> bytes:
+            return text.replace(b"\r\n", b"\n")
+
+        if process.returncode != 0:
+            print(normalize_newline(process.stderr).decode())
+            return
+
+        output_path = Path(file_path.parent, output_name)
+        output_path = output_path.with_suffix(self.suffix_map[language])
+
+        output_path.write_text(normalize_newline(process.stdout).decode())
+        print(f"Generated path: {output_path!s}")
+
+    def is_visible(self):
+        return self.view.match_selector(0, UI_VIEW_SELECTOR)
 
 
 CURRENT_FILE_DIRECTORY = Path(__file__).parent
