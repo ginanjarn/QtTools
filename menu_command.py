@@ -15,7 +15,7 @@ from string import Template as StringTemplate
 import sublime
 import sublime_plugin
 
-UI_VIEW_SELECTOR = "text.qt.ui"
+UI_VIEW_SELECTOR = "text.xml.ui"
 
 
 def get_project_folder(path: str) -> str:
@@ -47,7 +47,7 @@ class QttoolsOpenDesignerCommand(sublime_plugin.TextCommand):
             sublime.error_message(message)
 
     def is_visible(self):
-        return self.view.match_selector(0, "text.qt.ui")
+        return self.view.match_selector(0, UI_VIEW_SELECTOR)
 
 
 class QttoolsGenerateCodeCommand(sublime_plugin.TextCommand):

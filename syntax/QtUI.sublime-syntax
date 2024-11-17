@@ -4,7 +4,7 @@
 file_extensions:
   - ui
 
-scope: text.qt.ui
+scope: text.xml.ui
 
 contexts:
   main:
