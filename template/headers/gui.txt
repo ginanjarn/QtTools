@@ -9,16 +9,16 @@ class ${class_name};
 
 class ${class_name} : public ${baseclass_name}
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit ${class_name}(QWidget *parent = nullptr);
-    ~${class_name}();
+	explicit ${class_name}(QWidget *parent = nullptr);
+	~${class_name}();
 
 private slots:
 
 private:
-    Ui::${class_name} *ui;
+	Ui::${class_name} *ui;
 };
 
 #endif // ${include_guard}
